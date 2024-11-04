@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement; // Required to reload the scene
 
 public class PlayerController : MonoBehaviour 
 {
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the Player
+		score = 0; // Reset score to 0
+		health = 5; // Reset health to 5
 	}
 
 	void FixedUpdate()
@@ -26,6 +29,16 @@ public class PlayerController : MonoBehaviour
 		
 		// Move the Player
 		rb.MovePosition(transform.position + movement * speed * Time.fixedDeltaTime);
+	}
+
+	void Update()
+	{
+		// Check if health is 0
+		if (health == 0)
+		{
+			Debug.Log("Game Over!"); // Log "Game Over!" to the console
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
+		}
 	}
 
 	// This function is called when another collider enters the trigger collider attached to this object
