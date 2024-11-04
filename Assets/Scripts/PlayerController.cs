@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
 	private int score = 0; // Private score variable initialized to 0
 
+	public int health = 5; // Public health variable initialized to 5
+
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the Player
@@ -35,6 +37,18 @@ public class PlayerController : MonoBehaviour
 			Debug.Log("Score: " + score); // Log the score to the console
 			other.gameObject.SetActive(false); // Disable the Coin GameObject
 			// Alternatively, you could destroy the Coin: Destroy(other.gameObject);
+		}
+		else if (other.CompareTag("Trap")) // Check if the other object has the tag "Trap"
+		{
+			health--; // Decrement the health
+			Debug.Log("Health: " + health); // Log the health to the console
+
+			// Optionally, you can add logic to handle what happens when health reaches zero
+			if (health <= 0)
+			{
+				Debug.Log("Game Over"); // Example of game over condition
+				// Here, you can add further logic for game over, respawning, etc.
+			}
 		}
 	}
 }
