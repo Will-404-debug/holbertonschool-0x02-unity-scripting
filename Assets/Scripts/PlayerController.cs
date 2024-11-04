@@ -49,6 +49,10 @@ public class PlayerController : MonoBehaviour
 				Debug.Log("Game Over"); // Example of game over condition
 				// Here, you can add further logic for game over, respawning, etc.
 			}
+			else if (other.CompareTag("Goal")) // Check if the other object has the tag "Goal"
+			{
+				Debug.Log("You win!"); // Log the victory message to the console
+			}
 		}
 	}
 }
