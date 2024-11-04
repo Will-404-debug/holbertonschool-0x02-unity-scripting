@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody rb;
 
+	private int score = 0; // Private score variable initialized to 0
+
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>(); // Get the Rigidbody component attached to the Player
@@ -22,5 +24,17 @@ public class PlayerController : MonoBehaviour
 		
 		// Move the Player
 		rb.MovePosition(transform.position + movement * speed * Time.fixedDeltaTime);
+	}
+
+	// This function is called when another collider enters the trigger collider attached to this object
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Pickup")) // Check if the other object has the tag "Pickup"
+		{
+			score++; // Increment the score
+			Debug.Log("Score: " + score); // Log the score to the console
+			other.gameObject.SetActive(false); // Disable the Coin GameObject
+			// Alternatively, you could destroy the Coin: Destroy(other.gameObject);
+		}
 	}
 }
